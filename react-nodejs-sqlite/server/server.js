@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const database = require('./database');
 
 const app = express();
-const db = new sqlite3.Database(':memory:');
+const db = new sqlite3.Database('./data.db');
 
 // CORS 미들웨어 추가
 app.use(cors());
@@ -30,8 +30,10 @@ db.serialize(() => {
     )
   `);
 
-  db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['John Doe', 30]);
-  db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Jane Smith', 25]);
+  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Sang Joon', 47]);
+  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Eun Jung', 46]);
+  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Na Yoon', 13]);
+  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['So Yoon', 10]);
 });
 
 app.get('/api/users', (req, res) => {
@@ -45,6 +47,32 @@ app.get('/api/users', (req, res) => {
   });
 });
 
+// // GET /api/users 요청에 대한 처리
+// app.get('/api/users', (req, res) => {
+//   database.getUsers("SELECT * FROM users",(err, users) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     } else {
+//       res.json(users);
+//     }
+//   });
+// });
+
+// // POST /api/users 요청에 대한 처리
+// app.post('/api/users', (req, res) => {
+//   const { name, age } = req.body;
+  
+//   database.addUser(name, age, (err, userId) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     } else {
+//       res.json({ id: userId });
+//     }
+//   });
+// });
+
 app.listen(8000, () => {
-  console.log('Server is running on port 8000');
+  console.log('서버가 8000 포트에서 실행 중입니다.');
 });
