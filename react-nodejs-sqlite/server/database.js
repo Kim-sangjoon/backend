@@ -3,7 +3,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // 데이터베이스 연결 설정
-const db = new sqlite3.Database(':memory:');
+const db = new sqlite3.Database('./data.db');
 
 
 
@@ -29,6 +29,7 @@ const addUser = (name, age, callback) => {
     }
   });
 };
+
 
 module.exports = {
   getUsers,
