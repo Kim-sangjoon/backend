@@ -5,43 +5,35 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
   const [users, setUsers] = useState([]);
-
+  console.log(users)
   useEffect(() => {
-    fetch('http://172.30.1.40:8000/api/users')
-    // fetch('http://localhost:8000/api/users')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-      .catch(error => console.error(error));
-  }, [users]);
+    selectUser();
+  }, []);
 
+  // const selectUser = () => {
+  //   fetch('http://172.30.1.40:8000/api/users')
+  //     .then(response => response.json())
+  //     .then(data => setUsers(data))
+  //     .catch(error => console.error(error));
+  // }
+  
   const selectUser = async () => {
-    fetch('http://172.30.1.40:8000/api/users')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-      .catch(error => console.error(error));
-    }
-  
-  
-  const hendleDelUser = (params) => {
-    deleteUser(params);
-  }
-    
-  const deleteUser = async () => {
-    try {
+    try{
       const response = await fetch(`http://172.30.1.40:8000/api/users`, {
-        method: 'DELETE'
+        method: 'GET'
       });
-  
+
       if (!response.ok) {
         throw new Error('API 요청 실패');
       }
   
       const data = await response.json();
+      await setUsers(data);
       console.log(data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   const addUser = async () => {
     const name = 'John Wick';
@@ -66,6 +58,24 @@ function App() {
       console.error(error);
     }
   };
+      
+  const deleteUser = async () => {
+    try {
+      const response = await fetch(`http://172.30.1.40:8000/api/users`, {
+        method: 'DELETE'
+      });
+  
+      if (!response.ok) {
+        throw new Error('API 요청 실패');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   
 
   return (
@@ -76,9 +86,9 @@ function App() {
           <li key={user.id}>{user.name} - {user.age}</li>
         ))}
       </ul>
-      <button onClick={addUser}>추가</button>
-      <button onClick={hendleDelUser}>모두삭제</button>
       <button onClick={selectUser}>검색</button>
+      <button onClick={addUser}>추가</button>
+      <button onClick={deleteUser}>모두삭제</button>
     </div>
   );
 }

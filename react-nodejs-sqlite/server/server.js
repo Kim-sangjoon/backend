@@ -33,11 +33,11 @@ app.use(bodyParser.json());
 //     )
 //   `);
 
-  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Sang Joon', 47]);
-  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Eun Jung', 46]);
-  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Na Yoon', 13]);
-  // db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['So Yoon', 10]);
-  // });
+//   db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Sang Joon', 47]);
+//   db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Eun Jung', 46]);
+//   db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['Na Yoon', 13]);
+//   db.run("INSERT INTO users (name, age) VALUES (?, ?)", ['So Yoon', 10]);
+// });
 
 // app.get('/api/users', (req, res) => {
 //   db.all("SELECT * FROM users", (err, rows) => {
